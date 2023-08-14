@@ -31,10 +31,22 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('be.visible')
     })
 
-    it.only('Campo de telefone continua vazio para valor não numérico', function(){
+    it('Campo de telefone continua vazio para valor não numérico', function(){
         cy.get('#phone')
           .type('asdasdasd')
           .should('have.value', '')
+    })
+
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
+        cy.get('#firstName').type('Rafaela')  //o # é o id, . é classe
+        cy.get('#lastName').type('Naka')
+        cy.get('#email').type('email@email.com')
+        cy.get('#phone-checkbox').click()
+        cy.get('#open-text-area').type('Teste')
+        cy.get('button[type="submit"]').click()
+
+        cy.get('.error').should('be.visible')
+
     })
 
 
