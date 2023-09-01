@@ -83,11 +83,16 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('be.visible')
     })
 
-
     it('envia o formulário com sucesso com um comando customizado', function(){
       cy.fillMandatoryFieldsAndSubmit()
 
       cy.get('.success').should('be.visible')
+    })
+
+    it('Seleciona um produto (Youtube) por seu texto', function(){
+      cy.get('#product')
+        .select('YouTube')
+        .should('have.value', 'youtube')
     })
   })
   
