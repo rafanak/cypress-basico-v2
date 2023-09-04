@@ -76,7 +76,6 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .should('have.value', '')
     })
 
-
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
         cy.contains('button', 'Enviar').click()
 
@@ -89,6 +88,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       cy.get('.success').should('be.visible')
     })
 
+    //---------------- SELEÇÃO ---------------------
     it('Seleciona um produto (Youtube) por seu texto', function(){
       cy.get('#product')
         .select('YouTube')
@@ -122,6 +122,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         })
     })
 
+    //--------------- ENVIO DE ARQUIVOS ---------------------------
     it('Seleciona um arquivo da pasta /fixtures', function(){
       cy.get('input[type="file"]')
         .should('not.have.value')
@@ -131,8 +132,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         })
     })
 
-   
-    it('Seleciona um arquivo da pasta /fixtures', function(){
+    it('Seleciona um arquivo simulando drag and drop', function(){
       cy.get('input[type="file"]')
         .should('not.have.value')
         .selectFile('./cypress/fixtures/example.json', {action: 'drag-drop'})
@@ -141,5 +141,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         })
     })
   
+    it('Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
+      cy.fixture('example.json').as('sampleFile')
+      cy.get('input[type="file"]')
+        .selectFile('@sampleFile')
+    })
 
+    //---------------- LINKS ---------------
+    
   })
